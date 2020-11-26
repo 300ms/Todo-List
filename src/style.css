@@ -20,8 +20,12 @@ nav {
   border-top: 2px solid red;
 }
 
-#projects {
-  min-height: 86%;
-  background-color: blue;
-  padding: 5%;
+.content {
+  height: 86%;
+}
+
+.project-ul {
+  max-width: 320px;
+  min-height: 100%;
+  background-color: #17141f;
 }
