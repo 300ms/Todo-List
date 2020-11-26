@@ -5,7 +5,7 @@ body {
 
 nav {
   height: 7%;
-  border-bottom: 2px solid #3d315b;
+  border-bottom: 2px solid blue;
 }
 
 .footer {
@@ -17,15 +17,34 @@ nav {
   background-color: #17141f;
   color: white;
   text-align: center;
-  border-top: 2px solid red;
+  border-top: 2px solid blue;
 }
 
 .content {
   height: 86%;
+  width: 100%;
+  padding: 0;
 }
 
 .project-ul {
-  max-width: 320px;
+  width: 20%;
   min-height: 100%;
   background-color: #17141f;
+}
+
+.todos {
+  width: 80%;
+  background-color: gray;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-auto-rows: 300px;
+  overflow-y: scroll;
+}
+
+.card {
+  justify-content: space-between;
+}
+
+.cardBody {
+  padding: 1.25rem;
 }
