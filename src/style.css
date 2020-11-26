@@ -1,0 +1,27 @@
+body {
+  height: 100vh;
+  color: #fff;
+}
+
+nav {
+  height: 7%;
+  border-bottom: 2px solid #3d315b;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 7%;
+  background-color: #17141f;
+  color: white;
+  text-align: center;
+  border-top: 2px solid red;
+}
+
+#projects {
+  min-height: 86%;
+  background-color: blue;
+  padding: 5%;
+}

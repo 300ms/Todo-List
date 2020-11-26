@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx webpack --mode production",
     "dev": "npx webpack --mode development",
+    "start": "npx webpack serve",
+    "build": "npx webpack --mode production",
     "watch": "npx webpack --watch"
   },
   "repository": {
@@ -26,8 +27,12 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "postcss": "^8.1.10",
+    "postcss-loader": "^4.1.0",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
-    "webpack": "^5.7.0",
+    "webpack": "^5.8.0",
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
