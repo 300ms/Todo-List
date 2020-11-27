@@ -5,4 +5,4 @@ import UI from './UI';
 
 
 document.addEventListener('DOMContentLoaded', UI.listProjects());
-document.addEventListener('DOMContentLoaded', UI.showProject());
+document.addEventListener('DOMContentLoaded', UI.showProject('project one'));

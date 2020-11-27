@@ -18,12 +18,14 @@ class UI {
     content.appendChild(ul);
   }
 
-  static showProject() {
+  static showProject(title) {
     const parent = document.querySelector('.todos');
-    const proj = tasks[0];/* .forEach(project => {
-      if (project.projectName === title);
-      return project;
-    }); */
+    let proj = {};
+    tasks.forEach(project => {
+      if (project.projectName === title) {
+        proj = project;
+      }
+    });
 
     proj.projectTodos.forEach(todo => {
       const div = `
