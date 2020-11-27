@@ -1,4 +1,5 @@
-import tasks from './todos';
+import tasks from './storage';
+import Project from './project';
 
 class UI {
   static listProjects() {
@@ -8,7 +9,7 @@ class UI {
     tasks.forEach(task => {
       const li = `
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <h4>${task.projectName}</h4>
+            <h4 class="project-title">${task.projectName}</h4>
           <span class="badge badge-primary badge-pill">14</span>
         </li>
       `;
@@ -20,27 +21,29 @@ class UI {
 
   static showProject(title) {
     const parent = document.querySelector('.todos');
-    let proj = {};
-    tasks.forEach(project => {
-      if (project.projectName === title) {
-        proj = project;
-      }
-    });
+    const proj = Project.getProject(title);
 
-    proj.projectTodos.forEach(todo => {
-      const div = `
-      <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-        <div class="card-header">buttons</div>
-        <div class="cardBody">
-          <h4 class="card-title">${todo.title}</h4>
-          <p class="card-text">${todo.description}</p>
+    if (proj) {
+      proj.projectTodos.forEach(todo => {
+        const div = `
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+          <div class="card-header">buttons</div>
+          <div class="cardBody">
+            <h4 class="card-title">${todo.title}</h4>
+            <p class="card-text">${todo.description}</p>
+          </div>
+          <div class="card-footer"><span>${todo.dueDate}</span><span>${todo.priority}</span></div>
         </div>
-        <div class="card-footer"><span>${todo.dueDate}</span><span>${todo.priority}</span></div>
-      </div>
-      `;
+        `;
 
-      parent.innerHTML += div;
-    });
+        parent.innerHTML += div;
+      });
+    }
+  }
+
+  static clearTodos() {
+    const content = document.querySelector('.todos');
+    content.innerHTML = '';
   }
 }
 
