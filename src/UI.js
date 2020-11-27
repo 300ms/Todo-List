@@ -24,18 +24,16 @@ class UI {
     const proj = Project.getProject(title);
 
     const template = `
-    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+    <div class="card text-white bg-primary mb-3" style="width: 20rem;">
       <form class="my-2 my-lg-0"></form>
-          <div class="card-header">Add Task</div>
-          <div class="cardBody">              
-            <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Name" name = 'name'>
-            <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Description" name = 'desc'>
-            <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Priority" name = 'priority'>
-              
-            
-          </div>
-          <div class="card-footer"><button class="btn btn-success float-right" type="submit">Submit</button></div>
-        </form>
+        <div class="card-header">Add Task</div>
+        <div class="cardBody">              
+          <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Name" name = 'name'>
+          <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Description" name = 'desc'>
+          <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Priority" name = 'priority'>
+        </div>
+        <div class="card-footer"><button class="btn btn-success float-right" type="submit">Submit</button></div>
+      </form>
     </div>
     `;
 
@@ -44,7 +42,7 @@ class UI {
     if (proj) {
       proj.projectTodos.forEach(todo => {
         const div = `
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+        <div class="card text-white bg-primary mb-3" style="width: 20rem;">
           <div class="card-header">buttons</div>
           <div class="cardBody">
             <h4 class="card-title">${todo.title}</h4>
