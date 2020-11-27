@@ -13,13 +13,13 @@ document.querySelector('.project-ul').addEventListener('click', (event) => {
   }
 });
 
-document.querySelector('#project-form').addEventListener('submit', e => {
+document.getElementById('project-form').addEventListener('submit', (e) => {
   e.preventDefault();
   const title = e.target.title.value;
   UI.addProject(title);
 });
 
-document.querySelector('#todo-form').addEventListener('submit', e => {
+document.querySelector('#todo-form').addEventListener('submit', (e) => {
   e.preventDefault();
 
   const projectTitle = e.target.currentProject.value;
@@ -29,4 +29,5 @@ document.querySelector('#todo-form').addEventListener('submit', e => {
   const priority = e.target.priority.value;
 
   UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority)
+  UI.todosFormReset()
 })

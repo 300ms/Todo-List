@@ -30,12 +30,12 @@ class UI {
         <div class="card-header">Add Task</div>
         <div class="cardBody">
           <input type="hidden" id="current-project" name="currentProject" value="${title}"> 
-          <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Name" name = 'name'>
-          <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Description" name = 'desc'>
-          <input class="form-control mr-sm-2 my-2" type="text" placeholder="Due date" name = 'dueDate'>
-          <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Priority" name = 'priority'>
+          <input class="form-control mr-sm-2 my-2 todo-name" type="text" placeholder="Task Name" name = 'name'>
+          <input class="form-control mr-sm-2 my-2 todo-desc" type="text" placeholder="Task Description" name = 'desc'>
+          <input class="form-control mr-sm-2 my-2 todo-due-date" type="text" placeholder="Due date" name = 'dueDate'>
+          <input class="form-control mr-sm-2 my-2 todo-priority" type="text" placeholder="Task Priority" name = 'priority'>
         </div>
-        <div class="card-footer"><button class="btn btn-success float-right" type="submit">Submit</button></div>
+        <div class="card-footer"><input class="btn btn-success float-right" type="submit" /></div>
       </form>
     </div>
     `;
@@ -94,6 +94,13 @@ class UI {
     parent.innerHTML += div;
 
     Todos.addTodos(projectTitle, todoTitle, desc, dueDate, priority)
+  }
+
+  static todosFormReset() {
+    document.querySelector('.todo-name').value = '';
+    document.querySelector('.todo-desc').value = '';
+    document.querySelector('.todo-due-date').value = '';
+    document.querySelector('.todo-priority').value = '';
   }
 }
 
