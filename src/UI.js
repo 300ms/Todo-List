@@ -45,6 +45,18 @@ class UI {
     const content = document.querySelector('.todos');
     content.innerHTML = '';
   }
+
+  static addProject(title){
+    const ul = document.querySelector('.project-ul');
+    const li = `
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h4 class="project-title">${title}</h4>
+          <span class="badge badge-primary badge-pill">14</span>
+        </li>
+      `;
+    ul.innerHTML += li;
+    Project.createProject(title);
+  }
 }
 
 export { UI as default };

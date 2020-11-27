@@ -10,6 +10,11 @@ class Project {
     });
     return proj;
   }
+
+  static createProject(title){
+    const proj = { projectName: 'project one', projectTodos:[] }
+    tasks.push(proj)
+  }
 }
 
 export { Project as default };

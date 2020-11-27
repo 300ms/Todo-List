@@ -13,3 +13,9 @@ document.querySelector('.project-ul').addEventListener('click', (event) => {
     UI.showProject(event.target.innerHTML);
   }
 });
+
+document.addEventListener('submit', e => {
+  e.preventDefault();
+  const title = e.target.title.value;
+  UI.addProject(title);
+});
