@@ -2,7 +2,6 @@ import './style.css';
 import 'bootstrap';
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import UI from './UI';
-import Project from './project';
 
 document.addEventListener('DOMContentLoaded', UI.listProjects());
 document.addEventListener('DOMContentLoaded', UI.showProject('project one'));

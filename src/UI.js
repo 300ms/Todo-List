@@ -46,7 +46,7 @@ class UI {
     content.innerHTML = '';
   }
 
-  static addProject(title){
+  static addProject(title) {
     const ul = document.querySelector('.project-ul');
     const li = `
         <li class="list-group-item d-flex justify-content-between align-items-center">

@@ -11,9 +11,9 @@ class Project {
     return proj;
   }
 
-  static createProject(title){
-    const proj = { projectName: 'project one', projectTodos:[] }
-    tasks.push(proj)
+  static createProject(title) {
+    const proj = { projectName: title, projectTodos: [] };
+    tasks.push(proj);
   }
 }
 
