@@ -1,5 +1,6 @@
 import tasks from './storage';
 import Project from './project';
+import Todos from './todo';
 
 class UI {
   static listProjects() {
@@ -25,11 +26,13 @@ class UI {
 
     const template = `
     <div class="card text-white bg-primary mb-3" style="width: 20rem;">
-      <form class="my-2 my-lg-0"></form>
+      <form class="my-2 my-lg-0" id = "todo-form" autocomplete="off">
         <div class="card-header">Add Task</div>
-        <div class="cardBody">              
+        <div class="cardBody">
+          <input type="hidden" id="current-project" name="currentProject" value="${title}"> 
           <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Name" name = 'name'>
           <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Description" name = 'desc'>
+          <input class="form-control mr-sm-2 my-2" type="text" placeholder="Due date" name = 'dueDate'>
           <input class="form-control mr-sm-2 my-2" type="text" placeholder="Task Priority" name = 'priority'>
         </div>
         <div class="card-footer"><button class="btn btn-success float-right" type="submit">Submit</button></div>
@@ -72,6 +75,25 @@ class UI {
       `;
     ul.innerHTML += li;
     Project.createProject(title);
+    
+  }
+
+  static addTodo(projectTitle, todoTitle, desc, dueDate, priority){
+    const parent = document.querySelector('.todos');
+    const div = `
+        <div class="card text-white bg-primary mb-3" style="width: 20rem;">
+          <div class="card-header">buttons</div>
+          <div class="cardBody">
+            <h4 class="card-title">${todoTitle}</h4>
+            <p class="card-text">${desc}</p>
+          </div>
+          <div class="card-footer"><span>${dueDate}</span><span>${priority}</span></div>
+        </div>
+        `;
+
+    parent.innerHTML += div;
+
+    Todos.addTodos(projectTitle, todoTitle, desc, dueDate, priority)
   }
 }
 

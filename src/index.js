@@ -13,8 +13,20 @@ document.querySelector('.project-ul').addEventListener('click', (event) => {
   }
 });
 
-document.addEventListener('submit', e => {
+document.querySelector('#project-form').addEventListener('submit', e => {
   e.preventDefault();
   const title = e.target.title.value;
   UI.addProject(title);
 });
+
+document.querySelector('#todo-form').addEventListener('submit', e => {
+  e.preventDefault();
+
+  const projectTitle = e.target.currentProject.value;
+  const todoTitle = e.target.name.value;
+  const desc = e.target.desc.value;
+  const dueDate = e.target.dueDate.value;
+  const priority = e.target.priority.value;
+
+  UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority)
+})
