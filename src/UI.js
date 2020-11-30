@@ -79,10 +79,9 @@ class UI {
       `;
     ul.innerHTML += li;
     Project.createProject(title);
-    
   }
 
-  static addTodo(projectTitle, todoTitle, desc, dueDate, priority){
+  static addTodo(projectTitle, todoTitle, desc, dueDate, priority) {
     const parent = document.querySelector('.todos');
     const div = `
         <div class="card text-white bg-primary mb-3" style="width: 20rem;">
@@ -97,7 +96,7 @@ class UI {
 
     parent.innerHTML += div;
 
-    Todos.addTodos(projectTitle, todoTitle, desc, dueDate, priority)
+    Todos.addTodos(projectTitle, todoTitle, desc, dueDate, priority);
   }
 
   static todosFormReset() {

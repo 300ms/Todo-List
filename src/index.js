@@ -28,6 +28,6 @@ document.querySelector('#todo-form').addEventListener('submit', (e) => {
   const dueDate = e.target.dueDate.value;
   const priority = e.target.priority.value;
 
-  UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority)
-  UI.todosFormReset()
-})
+  UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority);
+  UI.todosFormReset();
+});
