@@ -11,7 +11,11 @@ class UI {
       const li = `
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <h4 class="project-title">${task.projectName}</h4>
-          <span class="badge badge-primary badge-pill">14</span>
+            <div>
+              <span class="badge badge-primary badge-pill">14</span>
+              <button class="badge badge-warning badge-pill">Edit</button>
+              <button class="badge badge-danger badge-pill">Delete</button>
+            </div>
         </li>
       `;
       ul.innerHTML += li;
