@@ -15,6 +15,18 @@ class Project {
     const proj = { projectName: title, projectTodos: [] };
     tasks.push(proj);
   }
+
+  static edit(currentTitle, newTitle){
+    tasks.forEach((proj, index) => {
+      if(proj.projectName === currentTitle){
+        return {proj, index}
+      }
+      return {}
+    })
+
+
+
+  }
 }
 
 export { Project as default };
