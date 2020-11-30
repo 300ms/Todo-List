@@ -9,15 +9,27 @@ class UI {
 
     tasks.forEach(task => {
       const li = `
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="justify-content-between d-flex" style="width: 100%;">
+          <div class="d-inline-block">
             <h4 class="project-title">${task.projectName}</h4>
-            <div>
-              <span class="badge badge-primary badge-pill">14</span>
-              <button class="badge badge-warning badge-pill">Edit</button>
-              <button class="badge badge-danger badge-pill">Delete</button>
-            </div>
-        </li>
-      `;
+          </div>
+          <div class="d-inline-block">
+            <span class="badge badge-primary badge-pill">14</span>
+            <button class="badge badge-warning badge-pill">Edit</button>
+            <button class="badge badge-danger badge-pill">Delete</button>
+          </div>
+        </div>
+        
+        <div class="d-none" id = "showEditFrom" style="width: 100%;">
+          <form class="form-inline my-2 my-lg-0 justify-content-between" id ="project-name-form" autocomplete="off" style="width: 100%;">
+            <input class="form-control mr-sm-2" type="text" placeholder="New Project Name" name = 'title' style="width: 10rem;">
+            <button class="btn btn-success text-center px-0 mx-1" type="submit" style="width: 4rem;">save</button>
+            <button class="btn btn-danger text-center px-0 mx-1" type="submit" style="width: 4rem;">cancel</button>
+          </form>
+        </div>
+      </li>
+    `;
       ul.innerHTML += li;
     });
 
@@ -99,11 +111,21 @@ class UI {
     Todos.addTodos(projectTitle, todoTitle, desc, dueDate, priority);
   }
 
+  // static editProject(){
+
+  // }
+
   static todosFormReset() {
     document.querySelector('.todo-name').value = '';
     document.querySelector('.todo-desc').value = '';
     document.querySelector('.todo-due-date').value = '';
     document.querySelector('.todo-priority').value = '';
+  }
+
+  static toggleProjectForm(){
+    const element = document.querySelector('#showEditFrom');
+    element.classList.toggle('d-flex')
+    element.classList.toggle('d-none')
   }
 }
 

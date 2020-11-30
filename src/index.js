@@ -31,3 +31,15 @@ document.querySelector('#todo-form').addEventListener('submit', (e) => {
   UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority);
   UI.todosFormReset();
 });
+
+document.querySelector('.project-ul').addEventListener('click', (e) => {
+  const element = e.target
+  let projectFrom = document.querySelector('.project-form-title');
+
+  if(element.id === 'editProject'){
+    UI.toggleProjectForm()
+    // const currentProject = e.target.parentElement.previousElementSibling.innerHTML
+    // projectFrom.value = currentProject
+  }
+  
+})
