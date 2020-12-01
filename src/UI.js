@@ -97,6 +97,7 @@ class UI {
   static addProject(title) {
     Project.createProject(title);
     UI.refreshProjectList();
+    UI.addListeners();
   }
 
   static addTodo(projectTitle, todoTitle, desc, dueDate, priority) {
@@ -122,7 +123,8 @@ class UI {
     const currentTitle = children[0].children[0].innerHTML;
     const newTitle = e.target.parentElement.title.value;
     Project.edit(currentTitle, newTitle);
-    children[0].children[0].innerHTML = newTitle;
+    UI.refreshProjectList();
+    UI.addListeners();
   }
 
   static deleteProject(e) {
@@ -130,6 +132,7 @@ class UI {
     Project.delete(title);
 
     UI.refreshProjectList();
+    UI.addListeners();
   }
 
   static todosFormReset() {
@@ -157,6 +160,33 @@ class UI {
       editForm.classList.toggle('d-none');
       editForm.children[0].reset();
     }
+  }
+
+  static addListeners() {
+    document.querySelectorAll('.editProject').forEach(button => {
+      button.addEventListener('click', e => {
+        UI.toggleProjectForm(e);
+      });
+    });
+
+    document.querySelectorAll('.saveProject').forEach(button => {
+      button.addEventListener('click', e => {
+        UI.editProject(e);
+        UI.toggleProjectForm(e);
+      });
+    });
+
+    document.querySelectorAll('.cancelProject').forEach(button => {
+      button.addEventListener('click', e => {
+        UI.toggleProjectForm(e);
+      });
+    });
+
+    document.querySelectorAll('.deleteProject').forEach(button => {
+      button.addEventListener('click', e => {
+        UI.deleteProject(e);
+      });
+    });
   }
 }
 

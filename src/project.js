@@ -23,9 +23,7 @@ class Project {
   }
 
   static edit(currentTitle, newTitle) {
-    if (Project.getProject(currentTitle)) {
-      Project.getProject(currentTitle).projectName = newTitle;
-    }
+    Store.editProjectOnLocal(currentTitle, newTitle);
   }
 
   static delete(title) {

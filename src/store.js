@@ -18,6 +18,18 @@ class Store {
     localStorage.setItem('projects', JSON.stringify(projects));
   }
 
+  static editProjectOnLocal(currentTitle, newTitle) {
+    const projects = Store.getProjectsFromLocal();
+
+    projects.forEach(p => {
+      if (p.projectName === currentTitle) {
+        p.projectName = newTitle;
+      }
+    });
+
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+
   static removeProjectFromLocal(title) {
     const projects = Store.getProjectsFromLocal();
 

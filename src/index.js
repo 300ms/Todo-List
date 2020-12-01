@@ -33,27 +33,4 @@ document.querySelector('#todo-form').addEventListener('submit', (e) => {
   UI.todosFormReset();
 });
 
-document.querySelectorAll('.editProject').forEach(button => {
-  button.addEventListener('click', e => {
-    UI.toggleProjectForm(e);
-  });
-});
-
-document.querySelectorAll('.saveProject').forEach(button => {
-  button.addEventListener('click', e => {
-    UI.editProject(e);
-    UI.toggleProjectForm(e);
-  });
-});
-
-document.querySelectorAll('.cancelProject').forEach(button => {
-  button.addEventListener('click', e => {
-    UI.toggleProjectForm(e);
-  });
-});
-
-document.querySelectorAll('.deleteProject').forEach(button => {
-  button.addEventListener('click', e => {
-    UI.deleteProject(e);
-  });
-});
+UI.addListeners();
