@@ -32,13 +32,14 @@ class Project {
     if (Project.getProject(currentTitle)) {
       Project.getProject(currentTitle).projectName = newTitle;
     }
-    /*
-    tasks.forEach((proj, index) => {
-      if (proj.projectName === currentTitle) {
-        return { proj, index };
+  }
+
+  static delete(title){
+    if(Project.getProject(title)){
+      if(Project.getProject(title).projectTodos.length > 0){
+        alert('This project has incomplete tasks')
       }
-      return {};
-    }); */
+    }
   }
 }
 

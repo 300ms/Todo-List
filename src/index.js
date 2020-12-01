@@ -50,19 +50,12 @@ document.querySelectorAll('.saveProject').forEach(button => {
 document.querySelectorAll('.cancelProject').forEach(button => {
   button.addEventListener('click', e => { UI.toggleProjectForm(e); });
 });
-/* .addEventListener('click', (e) => {
-  const element = e.target;
-  // const projectFrom = document.querySelector('.project-form-title');
 
-  if (element.id === 'editProject') {
-    UI.toggleProjectForm();
-  }
+document.querySelectorAll('.deleteProject').forEach(button => {
+  button.addEventListener('click', e => {
+    const title = e.target.parentElement.previousElementSibling.children[0].innerHTML
+    Project.delete(title)
+  })
+})
 
-  if (element.id === 'saveProject') {
-    UI.toggleProjectForm();
-  }
 
-  if (element.id === 'deleteProject') {
-    UI.toggleProjectForm();
-  }
-}); */

@@ -50,6 +50,11 @@ const tasks = [
       },
     ],
   },
+
+  {
+    projectName: 'Another Project',
+    projectTodos: [],
+  },
 ];
 
 export { tasks as default };
