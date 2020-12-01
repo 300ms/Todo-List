@@ -34,30 +34,27 @@ document.querySelector('#todo-form').addEventListener('submit', (e) => {
 });
 
 document.querySelectorAll('.editProject').forEach(button => {
-  button.addEventListener('click', e => { UI.toggleProjectForm(e); });
+  button.addEventListener('click', e => {
+    UI.toggleProjectForm(e);
+  });
 });
 
 document.querySelectorAll('.saveProject').forEach(button => {
   button.addEventListener('click', e => {
+    UI.editProject(e);
     UI.toggleProjectForm(e);
-    const { children } = e.target.parentElement.parentElement.previousElementSibling;
-    const currentTitle = children[0].children[0].innerHTML;
-    const newTitle = e.target.parentElement.title.value;
-    Project.edit(currentTitle, newTitle);
   });
 });
 
 document.querySelectorAll('.cancelProject').forEach(button => {
-  button.addEventListener('click', e => { UI.toggleProjectForm(e); });
+  button.addEventListener('click', e => {
+    UI.toggleProjectForm(e);
+  });
 });
 
 document.querySelectorAll('.deleteProject').forEach(button => {
   button.addEventListener('click', e => {
-    const title = e.target.parentElement.previousElementSibling.children[0].innerHTML
-    Project.delete(title, tasks)
-
-    console.log(tasks)
-  })
-})
-
-
+    const title = e.target.parentElement.previousElementSibling.children[0].innerHTML;
+    Project.delete(title, tasks);
+  });
+});

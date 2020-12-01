@@ -111,9 +111,12 @@ class UI {
     Todos.addTodos(projectTitle, todoTitle, desc, dueDate, priority);
   }
 
-  // static editProject(){
-
-  // }
+  static editProject(e) {
+    const { children } = e.target.parentElement.parentElement.previousElementSibling;
+    const currentTitle = children[0].children[0].innerHTML;
+    const newTitle = e.target.parentElement.title.value;
+    Project.edit(currentTitle, newTitle);
+  }
 
   static todosFormReset() {
     document.querySelector('.todo-name').value = '';
@@ -138,17 +141,8 @@ class UI {
       projectInfo.classList.toggle('d-none');
       editForm.classList.toggle('d-flex');
       editForm.classList.toggle('d-none');
+      editForm.reset();
     }
-
-    /*
-
-    const editForm = document.querySelector('#showEditFrom');
-    const projectInfo = document.querySelector('#projectInfo');
-    editForm.classList.toggle('d-flex');
-    editForm.classList.toggle('d-none');
-    projectInfo.classList.toggle('d-flex');
-    projectInfo.classList.toggle('d-none');
-  */
   }
 }
 
