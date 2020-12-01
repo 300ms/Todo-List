@@ -118,6 +118,13 @@ class UI {
     Project.edit(currentTitle, newTitle);
   }
 
+  static deleteProject(e) {
+    const li = e.target.parentElement.parentElement.parentElement;
+    const title = e.target.parentElement.previousElementSibling.children[0].innerHTML;
+    li.remove();
+    Project.delete(title, tasks);
+  }
+
   static todosFormReset() {
     document.querySelector('.todo-name').value = '';
     document.querySelector('.todo-desc').value = '';
