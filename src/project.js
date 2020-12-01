@@ -34,10 +34,12 @@ class Project {
     }
   }
 
-  static delete(title){
+  static delete(title, tasks){
     if(Project.getProject(title)){
       if(Project.getProject(title).projectTodos.length > 0){
         alert('This project has incomplete tasks')
+      }else {
+        tasks.splice(tasks.indexOf(Project.getProject(title)), 1)
       }
     }
   }

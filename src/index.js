@@ -54,7 +54,9 @@ document.querySelectorAll('.cancelProject').forEach(button => {
 document.querySelectorAll('.deleteProject').forEach(button => {
   button.addEventListener('click', e => {
     const title = e.target.parentElement.previousElementSibling.children[0].innerHTML
-    Project.delete(title)
+    Project.delete(title, tasks)
+
+    console.log(tasks)
   })
 })
 
