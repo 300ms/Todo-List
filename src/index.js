@@ -2,6 +2,8 @@ import './style.css';
 import 'bootstrap';
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import UI from './UI';
+import Project from './project';
+import tasks from './storage';
 
 document.addEventListener('DOMContentLoaded', UI.listProjects());
 document.addEventListener('DOMContentLoaded', UI.showProject('project one'));
@@ -36,7 +38,13 @@ document.querySelectorAll('.editProject').forEach(button => {
 });
 
 document.querySelectorAll('.saveProject').forEach(button => {
-  button.addEventListener('click', e => { UI.toggleProjectForm(e); });
+  button.addEventListener('click', e => {
+    UI.toggleProjectForm(e);
+    const { children } = e.target.parentElement.parentElement.previousElementSibling;
+    const currentTitle = children[0].children[0].innerHTML;
+    const newTitle = e.target.parentElement.title.value;
+    Project.edit(currentTitle, newTitle);
+  });
 });
 
 document.querySelectorAll('.cancelProject').forEach(button => {
