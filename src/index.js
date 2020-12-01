@@ -33,13 +33,12 @@ document.querySelector('#todo-form').addEventListener('submit', (e) => {
 });
 
 document.querySelector('.project-ul').addEventListener('click', (e) => {
-  const element = e.target
-  let projectFrom = document.querySelector('.project-form-title');
+  const element = e.target;
+  // const projectFrom = document.querySelector('.project-form-title');
 
-  if(element.id === 'editProject'){
-    UI.toggleProjectForm()
+  if (element.id === 'editProject') {
+    UI.toggleProjectForm();
     // const currentProject = e.target.parentElement.previousElementSibling.innerHTML
     // projectFrom.value = currentProject
   }
-  
-})
+});

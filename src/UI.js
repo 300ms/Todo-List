@@ -10,18 +10,18 @@ class UI {
     tasks.forEach(task => {
       const li = `
       <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="justify-content-between d-flex" style="width: 100%;">
+        <div class="justify-content-between d-flex" id="projectInfo" style="width: 100%;">
           <div class="d-inline-block">
             <h4 class="project-title">${task.projectName}</h4>
           </div>
           <div class="d-inline-block">
             <span class="badge badge-primary badge-pill">14</span>
-            <button class="badge badge-warning badge-pill">Edit</button>
-            <button class="badge badge-danger badge-pill">Delete</button>
+            <button class="badge badge-warning badge-pill" id="editProject">Edit</button>
+            <button class="badge badge-danger badge-pill" id="deleteProject">Delete</button>
           </div>
         </div>
         
-        <div class="d-none" id = "showEditFrom" style="width: 100%;">
+        <div class="d-none" id="showEditFrom" style="width: 100%;">
           <form class="form-inline my-2 my-lg-0 justify-content-between" id ="project-name-form" autocomplete="off" style="width: 100%;">
             <input class="form-control mr-sm-2" type="text" placeholder="New Project Name" name = 'title' style="width: 10rem;">
             <button class="btn btn-success text-center px-0 mx-1" type="submit" style="width: 4rem;">save</button>
@@ -122,10 +122,13 @@ class UI {
     document.querySelector('.todo-priority').value = '';
   }
 
-  static toggleProjectForm(){
-    const element = document.querySelector('#showEditFrom');
-    element.classList.toggle('d-flex')
-    element.classList.toggle('d-none')
+  static toggleProjectForm() {
+    const editForm = document.querySelector('#showEditFrom');
+    const projectInfo = document.querySelector('#projectInfo');
+    editForm.classList.toggle('d-flex');
+    editForm.classList.toggle('d-none');
+    projectInfo.classList.toggle('d-flex');
+    projectInfo.classList.toggle('d-none');
   }
 }
 
