@@ -2,11 +2,9 @@ import './style.css';
 import 'bootstrap';
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import UI from './UI';
-import tasks from './storage';
 
 document.addEventListener('DOMContentLoaded', UI.listProjects());
 document.addEventListener('DOMContentLoaded', UI.showProject('project one'));
-document.addEventListener('DOMContentLoaded', console.log(tasks));
 
 document.querySelector('.project-ul').addEventListener('click', (event) => {
   if (event.target.classList.contains('project-title')) {
@@ -55,6 +53,5 @@ document.querySelectorAll('.cancelProject').forEach(button => {
 document.querySelectorAll('.deleteProject').forEach(button => {
   button.addEventListener('click', e => {
     UI.deleteProject(e);
-    console.log(tasks);
   });
 });
