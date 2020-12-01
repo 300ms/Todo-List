@@ -15,7 +15,7 @@ document.querySelector('.project-ul').addEventListener('click', (event) => {
 
 document.getElementById('project-form').addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log("xxx");
+  console.log('xxx');
   const title = e.target.title.value;
   UI.addProject(title);
 });

@@ -58,7 +58,7 @@ class UI {
 
     parent.innerHTML += template;
 
-    if (proj) {
+    if (proj.projectTodos) {
       proj.projectTodos.forEach(todo => {
         const div = `
         <div class="card text-white bg-primary mb-3" style="width: 20rem;">
@@ -81,16 +81,22 @@ class UI {
     content.innerHTML = '';
   }
 
-  static addProject(title) {
+  static refreshProjectList() {
     const ul = document.querySelector('.project-ul');
-    const li = `
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <h4 class="project-title">${title}</h4>
-          <span class="badge badge-primary badge-pill">14</span>
-        </li>
-      `;
-    ul.innerHTML += li;
+    ul.innerHTML = `
+      <li>
+        <form class="my-2 my-lg-0" id="project-form" autocomplete="off">
+          <input class="form-control mr-sm-2 project-form-title" type="text" placeholder="New Project" name = 'title'>
+          <button class="btn btn-success float-right my-3 mx-3" type="submit">Submit</button>
+        </form>
+      </li>
+    `;
+    UI.listProjects();
+  }
+
+  static addProject(title) {
     Project.createProject(title);
+    UI.refreshProjectList();
   }
 
   static addTodo(projectTitle, todoTitle, desc, dueDate, priority) {
@@ -120,10 +126,10 @@ class UI {
   }
 
   static deleteProject(e) {
-    const li = e.target.parentElement.parentElement.parentElement;
     const title = e.target.parentElement.previousElementSibling.children[0].innerHTML;
-    li.remove();
     Project.delete(title);
+
+    UI.refreshProjectList();
   }
 
   static todosFormReset() {
