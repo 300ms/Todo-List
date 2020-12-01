@@ -16,16 +16,16 @@ class UI {
           </div>
           <div class="d-inline-block">
             <span class="badge badge-primary badge-pill">14</span>
-            <button class="badge badge-warning badge-pill" id="editProject">Edit</button>
-            <button class="badge badge-danger badge-pill" id="deleteProject">Delete</button>
+            <button class="badge badge-warning badge-pill editProject">Edit</button>
+            <button class="badge badge-danger badge-pill deleteProject">Delete</button>
           </div>
         </div>
         
         <div class="d-none" id="showEditFrom" style="width: 100%;">
           <form class="form-inline my-2 my-lg-0 justify-content-between" id ="project-name-form" autocomplete="off" style="width: 100%;">
             <input class="form-control mr-sm-2" type="text" placeholder="New Project Name" name = 'title' style="width: 10rem;">
-            <button class="btn btn-success text-center px-0 mx-1" type="submit" style="width: 4rem;">save</button>
-            <button class="btn btn-danger text-center px-0 mx-1" type="submit" style="width: 4rem;">cancel</button>
+            <button class="btn btn-success text-center px-0 mx-1 saveProject" type="button" style="width: 4rem;">save</button>
+            <button class="btn btn-danger text-center px-0 mx-1 cancelProject" type="button" style="width: 4rem;">cancel</button>
           </form>
         </div>
       </li>
@@ -122,13 +122,33 @@ class UI {
     document.querySelector('.todo-priority').value = '';
   }
 
-  static toggleProjectForm() {
+  static toggleProjectForm(e) {
+    let projectInfo;
+    let editForm;
+    if (e.target.classList.contains('saveProject') || e.target.classList.contains('cancelProject')) {
+      projectInfo = e.target.parentElement.parentElement.previousElementSibling;
+      editForm = e.target.parentElement.parentElement;
+    } else if (e.target.classList.contains('editProject') || e.target.classList.contains('deleteProject')) {
+      projectInfo = e.target.parentElement.parentElement;
+      editForm = e.target.parentElement.parentElement.nextElementSibling;
+    }
+
+    if (projectInfo && editForm) {
+      projectInfo.classList.toggle('d-flex');
+      projectInfo.classList.toggle('d-none');
+      editForm.classList.toggle('d-flex');
+      editForm.classList.toggle('d-none');
+    }
+
+    /*
+
     const editForm = document.querySelector('#showEditFrom');
     const projectInfo = document.querySelector('#projectInfo');
     editForm.classList.toggle('d-flex');
     editForm.classList.toggle('d-none');
     projectInfo.classList.toggle('d-flex');
     projectInfo.classList.toggle('d-none');
+  */
   }
 }
 

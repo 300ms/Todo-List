@@ -14,7 +14,6 @@ document.querySelector('.project-ul').addEventListener('click', (event) => {
 });
 
 document.getElementById('project-form').addEventListener('submit', (e) => {
-  e.preventDefault();
   const title = e.target.title.value;
   UI.addProject(title);
 });
@@ -32,13 +31,30 @@ document.querySelector('#todo-form').addEventListener('submit', (e) => {
   UI.todosFormReset();
 });
 
-document.querySelector('.project-ul').addEventListener('click', (e) => {
+document.querySelectorAll('.editProject').forEach(button => {
+  button.addEventListener('click', e => { UI.toggleProjectForm(e); });
+});
+
+document.querySelectorAll('.saveProject').forEach(button => {
+  button.addEventListener('click', e => { UI.toggleProjectForm(e); });
+});
+
+document.querySelectorAll('.cancelProject').forEach(button => {
+  button.addEventListener('click', e => { UI.toggleProjectForm(e); });
+});
+/* .addEventListener('click', (e) => {
   const element = e.target;
   // const projectFrom = document.querySelector('.project-form-title');
 
   if (element.id === 'editProject') {
     UI.toggleProjectForm();
-    // const currentProject = e.target.parentElement.previousElementSibling.innerHTML
-    // projectFrom.value = currentProject
   }
-});
+
+  if (element.id === 'saveProject') {
+    UI.toggleProjectForm();
+  }
+
+  if (element.id === 'deleteProject') {
+    UI.toggleProjectForm();
+  }
+}); */
