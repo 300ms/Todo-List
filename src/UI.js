@@ -1,18 +1,18 @@
-import tasks from './storage';
 import Project from './project';
 import Todos from './todo';
+import Store from './store';
 
 class UI {
   static listProjects() {
     const content = document.querySelector('.content');
     const ul = document.querySelector('.project-ul');
-
-    tasks.forEach(task => {
+    const projects = Store.getProjectsFromLocal();
+    projects.forEach(project => {
       const li = `
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="justify-content-between d-flex" id="projectInfo" style="width: 100%;">
           <div class="d-inline-block">
-            <h4 class="project-title">${task.projectName}</h4>
+            <h4 class="project-title">${project.projectName}</h4>
           </div>
           <div class="d-inline-block">
             <span class="badge badge-primary badge-pill">14</span>
@@ -116,13 +116,14 @@ class UI {
     const currentTitle = children[0].children[0].innerHTML;
     const newTitle = e.target.parentElement.title.value;
     Project.edit(currentTitle, newTitle);
+    children[0].children[0].innerHTML = newTitle;
   }
 
   static deleteProject(e) {
     const li = e.target.parentElement.parentElement.parentElement;
     const title = e.target.parentElement.previousElementSibling.children[0].innerHTML;
     li.remove();
-    Project.delete(title, tasks);
+    Project.delete(title);
   }
 
   static todosFormReset() {
@@ -148,7 +149,7 @@ class UI {
       projectInfo.classList.toggle('d-none');
       editForm.classList.toggle('d-flex');
       editForm.classList.toggle('d-none');
-      editForm.reset();
+      editForm.children[0].reset();
     }
   }
 }

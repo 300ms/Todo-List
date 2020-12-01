@@ -1,4 +1,4 @@
-import tasks from './storage';
+import Store from './store';
 
 class Project {
   constructor(projectName, projectTodos) {
@@ -6,17 +6,11 @@ class Project {
     this.projectTodos = projectTodos;
   }
 
-  get() {
-    return this.projectName;
-  }
-
-  set(title) {
-    this.projectName = title;
-  }
-
   static getProject(title) {
+    const projects = Store.getProjectsFromLocal();
+
     let proj = {};
-    tasks.forEach(project => {
+    projects.forEach(project => {
       if (project.projectName === title) {
         proj = project;
       }
@@ -25,7 +19,7 @@ class Project {
   }
 
   static createProject(title) {
-    tasks.push(new Project(title, []));
+    Store.addProjectToLocal(new Project(title, []));
   }
 
   static edit(currentTitle, newTitle) {
@@ -34,12 +28,12 @@ class Project {
     }
   }
 
-  static delete(title, tasks) {
+  static delete(title) {
     if (Project.getProject(title)) {
       if (Project.getProject(title).projectTodos.length > 0) {
         alert('This project has incomplete tasks');
       } else {
-        tasks.splice(tasks.indexOf(Project.getProject(title)), 1);
+        Store.removeProjectFromLocal(title);
       }
     }
   }
