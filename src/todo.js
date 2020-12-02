@@ -16,6 +16,18 @@ class Todos {
       Store.addTodoToLocal(projectTitle, todo);
     }
   }
+
+  static delete(projectTitle, todo){
+    const project = Project.getProject(projectTitle);
+
+    if(project) {
+      const projTodo = project.projectTodos;
+
+      if(projTodo){
+        Store.removeTodoFromLocal(projectTitle, todo) ;
+      }
+    }
+  }
 }
 
 export { Todos as default };

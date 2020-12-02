@@ -109,7 +109,10 @@ class UI {
     const parent = document.querySelector('.todos');
     const div = `
         <div class="card text-white bg-primary mb-3" style="width: 20rem;">
-          <div class="card-header">buttons</div>
+          <div class="card-header">
+            <input type = "checkbox">
+            <button class="badge badge-danger badge-pill deleteTodo">Delete</button>
+          </div>
           <div class="cardBody">
             <h4 class="card-title">${todoTitle}</h4>
             <p class="card-text">${desc}</p>
@@ -179,8 +182,17 @@ class UI {
 
       UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority);
       UI.todosFormReset();
-      console.log(projectTitle);
     });
+
+    document.querySelectorAll('.deleteTodo').forEach(button => {
+      button.addEventListener('click', e => {
+        const currentProject = document.querySelector('#current-project').value;
+        const todoTitle = e.target.parentElement.nextElementSibling.children[0].innerHTML;
+        
+        e.target.parentElement.parentElement.remove()
+        Todos.delete(currentProject, todoTitle)
+      })
+    })
   }
 
   static addListeners() {

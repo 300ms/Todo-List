@@ -60,7 +60,7 @@ class Store {
     localStorage.setItem('projects', JSON.stringify(proj));
   }
 
-  static removeTodoFromLocal(projectTitle, todo) {
+  static removeTodoFromLocal(projectTitle, todoTitle) {
     const projects = Store.getProjectsFromLocal();
     let proj;
     projects.forEach((p) => {
@@ -71,7 +71,7 @@ class Store {
 
     if(proj) {
       proj.projectTodos.forEach((t, index) => {
-        if (t.title === todo.title) {
+        if (t.title === todoTitle) {
           proj.projectTodos.splice(index, 1);
         }
       });
