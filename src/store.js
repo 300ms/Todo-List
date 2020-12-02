@@ -59,6 +59,28 @@ class Store {
 
     localStorage.setItem('projects', JSON.stringify(proj));
   }
+
+  static removeTodoFromLocal(projectTitle, todo) {
+    const projects = Store.getProjectsFromLocal();
+    let proj;
+    projects.forEach((p) => {
+      if (p.projectName === projectTitle) {
+        proj = p
+      }
+    });
+
+    if(proj) {
+      proj.projectTodos.forEach((t, index) => {
+        if (t.title === todo.title) {
+          proj.projectTodos.splice(index, 1);
+        }
+      });
+    }
+    
+
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+
 }
 
 export { Store as default };

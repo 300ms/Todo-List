@@ -62,7 +62,10 @@ class UI {
       proj.projectTodos.forEach(todo => {
         const div = `
         <div class="card text-white bg-primary mb-3" style="width: 20rem;">
-          <div class="card-header">buttons</div>
+          <div class="card-header">
+            <input type = "checkbox">
+            <button class="badge badge-danger badge-pill deleteTodo">Delete</button>
+          </div>
           <div class="cardBody">
             <h4 class="card-title">${todo.title}</h4>
             <p class="card-text">${todo.description}</p>
