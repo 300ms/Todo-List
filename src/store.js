@@ -44,14 +44,7 @@ class Store {
 
   static addTodoToLocal(projectTitle, todo) {
     const proj = Store.getProjectsFromLocal();
-
-    let project;
-
-    proj.forEach(p => {
-      if (p.projectName === projectTitle) {
-        project = p;
-      }
-    });
+    const project = Store.listAndReturnProject(proj, projectTitle)
 
     if (project) {
       project.projectTodos.push(todo);
@@ -62,12 +55,7 @@ class Store {
 
   static removeTodoFromLocal(projectTitle, todoTitle) {
     const projects = Store.getProjectsFromLocal();
-    let proj;
-    projects.forEach((p) => {
-      if (p.projectName === projectTitle) {
-        proj = p
-      }
-    });
+    const proj = Store.listAndReturnProject(projects, projectTitle)
 
     if(proj) {
       proj.projectTodos.forEach((t, index) => {
@@ -77,6 +65,31 @@ class Store {
       });
     }
     
+
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+
+  static listAndReturnProject(projects, projectTitle){
+    let proj;
+    projects.forEach((p) => {
+      if (p.projectName === projectTitle) {
+        proj = p
+      }
+    });
+    return proj
+  }
+
+  static edit(projectTitle, todoTitle, complete){
+    const projects = Store.getProjectsFromLocal();
+    const proj = Store.listAndReturnProject(projects, projectTitle);
+
+    if(proj) {
+      proj.projectTodos.forEach((t) => {
+        if(t.title === todoTitle){
+          t.complete = complete;
+        }
+      })
+    }
 
     localStorage.setItem('projects', JSON.stringify(projects));
   }

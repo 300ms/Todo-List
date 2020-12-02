@@ -63,7 +63,7 @@ class UI {
         const div = `
         <div class="card text-white bg-primary mb-3" style="width: 20rem;">
           <div class="card-header">
-            <input type = "checkbox">
+          <input type = "checkbox" class = "checkBox" name="complete">
             <button class="badge badge-danger badge-pill deleteTodo">Delete</button>
           </div>
           <div class="cardBody">
@@ -110,7 +110,7 @@ class UI {
     const div = `
         <div class="card text-white bg-primary mb-3" style="width: 20rem;">
           <div class="card-header">
-            <input type = "checkbox">
+            <input type = "checkbox" class = "checkBox" name="complete">
             <button class="badge badge-danger badge-pill deleteTodo">Delete</button>
           </div>
           <div class="cardBody">
@@ -179,6 +179,7 @@ class UI {
       const desc = e.target.desc.value;
       const dueDate = e.target.dueDate.value;
       const priority = e.target.priority.value;
+      // const complete = (e.target.complete.checked) ? 1 : 0
 
       UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority);
       UI.todosFormReset();
@@ -218,6 +219,13 @@ class UI {
     document.querySelectorAll('.deleteProject').forEach(button => {
       button.addEventListener('click', e => {
         UI.deleteProject(e);
+      });
+    });
+
+    document.querySelectorAll('.checkBox').forEach(button => {
+      button.addEventListener('click', e => {
+        // UI.deleteProject(e);
+        console.log(e.target.checked)
       });
     });
   }
