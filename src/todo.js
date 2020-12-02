@@ -9,29 +9,29 @@ class Todos {
       const todo = {
         title: todoTitle,
         description: desc,
-        dueDate: dueDate,
-        priority: priority,
-        complete: complete,
+        dueDate,
+        priority,
+        complete,
       };
 
       Store.addTodoToLocal(projectTitle, todo);
     }
   }
 
-  static delete(projectTitle, todo){
+  static delete(projectTitle, todo) {
     const project = Project.getProject(projectTitle);
 
-    if(project) {
+    if (project) {
       const projTodo = project.projectTodos;
 
-      if(projTodo){
-        Store.removeTodoFromLocal(projectTitle, todo) ;
+      if (projTodo) {
+        Store.removeTodoFromLocal(projectTitle, todo);
       }
     }
   }
 
-  static editTodoCheck(currentProject, currentTodo, complete){
-    
+  static editTodoCheck(projectTitle, todoTitle, complete) {
+    Store.editTodoOnLocal(projectTitle, todoTitle, complete);
   }
 }
 

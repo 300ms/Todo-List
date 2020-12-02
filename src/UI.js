@@ -41,7 +41,7 @@ class UI {
     const proj = Project.getProject(title);
 
     const template = `
-    <div class="card text-white bg-primary mb-3" style="width: 20rem;">
+    <div class="card text-white bg-secondary mb-3 mx-3" style="width: 20rem;">
       <form class="my-2 my-lg-0" id = "todo-form" autocomplete="off">
         <div class="card-header">Add Task</div>
         <div class="cardBody">
@@ -49,9 +49,14 @@ class UI {
           <input class="form-control mr-sm-2 my-2 todo-name" type="text" placeholder="Task Name" name = 'name'>
           <input class="form-control mr-sm-2 my-2 todo-desc" type="text" placeholder="Task Description" name = 'desc'>
           <input class="form-control mr-sm-2 my-2 todo-due-date" type="text" placeholder="Due date" name = 'dueDate'>
-          <input class="form-control mr-sm-2 my-2 todo-priority" type="text" placeholder="Task Priority" name = 'priority'>
+          <label for="priority">Priority:</label>
+
+          <select name="priority" id="priority" class="form-control mr-sm-2 my-2 todo-priority">
+            <option value="high">High</option>
+            <option value="low">Low</option>
+          </select>
         </div>
-        <button class="btn btn-success float-right my-3 mx-3" type="submit">Submit</button>
+        <button class="btn btn-success float-right mx-3" type="submit">Submit</button>
       </form>
     </div>
     `;
@@ -60,11 +65,20 @@ class UI {
 
     if (proj.projectTodos) {
       proj.projectTodos.forEach(todo => {
+        let bool;
+        if (todo.complete) {
+          bool = 'checked';
+        }
+        let cardClass = 'bg-primary';
+        if (todo.priority === 'high') {
+          cardClass = 'bg-warning';
+        }
         const div = `
-        <div class="card text-white bg-primary mb-3" style="width: 20rem;">
+        <div class="card text-white ${cardClass} mb-3 mx-3" style="width: 20rem;">
           <div class="card-header">
-          <input type = "checkbox" class = "checkBox" name="complete">
-            <button class="badge badge-danger badge-pill deleteTodo">Delete</button>
+            <label for="todo-status">Completed: </label>
+            <input type="checkbox" id="todo-status" class="checkBox" name="complete" ${bool}>
+            <button class="badge badge-danger badge-pill deleteTodo float-right">Delete</button>
           </div>
           <div class="cardBody">
             <h4 class="card-title">${todo.title}</h4>
@@ -77,8 +91,7 @@ class UI {
         parent.innerHTML += div;
       });
     }
-
-    UI.addTodoFormListener();
+    UI.addTodoListeners();
   }
 
   static clearTodos() {
@@ -97,33 +110,23 @@ class UI {
       </li>
     `;
     UI.listProjects();
+    UI.addListeners();
+  }
+
+  static refreshTodoList(title) {
+    const parent = document.querySelector('.todos');
+    parent.innerHTML = '';
+    UI.showProject(title);
   }
 
   static addProject(title) {
     Project.createProject(title);
     UI.refreshProjectList();
-    UI.addListeners();
   }
 
   static addTodo(projectTitle, todoTitle, desc, dueDate, priority) {
-    const parent = document.querySelector('.todos');
-    const div = `
-        <div class="card text-white bg-primary mb-3" style="width: 20rem;">
-          <div class="card-header">
-            <input type = "checkbox" class = "checkBox" name="complete">
-            <button class="badge badge-danger badge-pill deleteTodo">Delete</button>
-          </div>
-          <div class="cardBody">
-            <h4 class="card-title">${todoTitle}</h4>
-            <p class="card-text">${desc}</p>
-          </div>
-          <div class="card-footer"><span>${dueDate}</span><span>${priority}</span></div>
-        </div>
-        `;
-
-    parent.innerHTML += div;
-
     Todos.addTodos(projectTitle, todoTitle, desc, dueDate, priority);
+    UI.refreshTodoList(projectTitle);
   }
 
   static editProject(e) {
@@ -132,7 +135,6 @@ class UI {
     const newTitle = e.target.parentElement.title.value;
     Project.edit(currentTitle, newTitle);
     UI.refreshProjectList();
-    UI.addListeners();
   }
 
   static deleteProject(e) {
@@ -140,7 +142,6 @@ class UI {
     Project.delete(title);
 
     UI.refreshProjectList();
-    UI.addListeners();
   }
 
   static todosFormReset() {
@@ -170,7 +171,7 @@ class UI {
     }
   }
 
-  static addTodoFormListener() {
+  static addTodoListeners() {
     document.querySelector('#todo-form').addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -189,11 +190,24 @@ class UI {
       button.addEventListener('click', e => {
         const currentProject = document.querySelector('#current-project').value;
         const todoTitle = e.target.parentElement.nextElementSibling.children[0].innerHTML;
-        
-        e.target.parentElement.parentElement.remove()
-        Todos.delete(currentProject, todoTitle)
-      })
-    })
+
+        e.target.parentElement.parentElement.remove();
+        Todos.delete(currentProject, todoTitle);
+      });
+    });
+
+    document.querySelectorAll('.checkBox').forEach(button => {
+      button.addEventListener('click', e => {
+        const projectTitle = document.getElementById('current-project').value;
+        const todoTitle = e.target.parentElement.nextElementSibling.children[0].innerHTML;
+        const complete = (e.target.checked) ? 1 : 0;
+
+        Todos.editTodoCheck(projectTitle, todoTitle, complete);
+        console.log(projectTitle);
+        console.log(todoTitle);
+        console.log(complete);
+      });
+    });
   }
 
   static addListeners() {
@@ -219,13 +233,6 @@ class UI {
     document.querySelectorAll('.deleteProject').forEach(button => {
       button.addEventListener('click', e => {
         UI.deleteProject(e);
-      });
-    });
-
-    document.querySelectorAll('.checkBox').forEach(button => {
-      button.addEventListener('click', e => {
-        // UI.deleteProject(e);
-        console.log(e.target.checked)
       });
     });
   }
