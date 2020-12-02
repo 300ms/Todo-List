@@ -21,17 +21,6 @@ document.getElementById('project-form').addEventListener('submit', (e) => {
   UI.addProject(title);
 });
 
-document.querySelector('#todo-form').addEventListener('submit', (e) => {
-  e.preventDefault();
 
-  const projectTitle = e.target.currentProject.value;
-  const todoTitle = e.target.name.value;
-  const desc = e.target.desc.value;
-  const dueDate = e.target.dueDate.value;
-  const priority = e.target.priority.value;
-
-  UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority);
-  UI.todosFormReset();
-});
 
 UI.addListeners();

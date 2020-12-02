@@ -51,7 +51,7 @@ class UI {
           <input class="form-control mr-sm-2 my-2 todo-due-date" type="text" placeholder="Due date" name = 'dueDate'>
           <input class="form-control mr-sm-2 my-2 todo-priority" type="text" placeholder="Task Priority" name = 'priority'>
         </div>
-        <div class="card-footer"><input class="btn btn-success float-right" type="submit" /></div>
+        <button class="btn btn-success float-right my-3 mx-3" type="submit">Submit</button>
       </form>
     </div>
     `;
@@ -162,6 +162,7 @@ class UI {
     }
   }
 
+
   static addListeners() {
     document.querySelectorAll('.editProject').forEach(button => {
       button.addEventListener('click', e => {
@@ -186,6 +187,19 @@ class UI {
       button.addEventListener('click', e => {
         UI.deleteProject(e);
       });
+    });
+
+    document.querySelector('#todo-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+    
+      const projectTitle = e.target.currentProject.value;
+      const todoTitle = e.target.name.value;
+      const desc = e.target.desc.value;
+      const dueDate = e.target.dueDate.value;
+      const priority = e.target.priority.value;
+    
+      UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority);
+      // UI.todosFormReset();
     });
   }
 }
