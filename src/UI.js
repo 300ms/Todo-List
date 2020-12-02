@@ -84,7 +84,7 @@ class UI {
             <h4 class="card-title">${todo.title}</h4>
             <p class="card-text">${todo.description}</p>
           </div>
-          <div class="card-footer"><span>${todo.dueDate}</span><span>${todo.priority}</span></div>
+          <div class="card-footer"><span>${todo.dueDate}</span><span class="float-right">${todo.priority}</span></div>
         </div>
         `;
 
