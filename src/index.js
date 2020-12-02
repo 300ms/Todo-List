@@ -2,9 +2,10 @@ import './style.css';
 import 'bootstrap';
 import 'bootswatch/dist/pulse/bootstrap.min.css';
 import UI from './UI';
+import Store from './store';
 
 document.addEventListener('DOMContentLoaded', UI.listProjects());
-document.addEventListener('DOMContentLoaded', UI.showProject('project one'));
+document.addEventListener('DOMContentLoaded', UI.showProject(Store.getProjectsFromLocal()[0].projectName));
 
 document.querySelector('.project-ul').addEventListener('click', (event) => {
   if (event.target.classList.contains('project-title')) {

@@ -1,4 +1,5 @@
 import Project from './project';
+import Store from './store'
 
 class Todos {
   static addTodos(projectTitle, todoTitle, desc, dueDate, priority) {
@@ -11,8 +12,8 @@ class Todos {
         dueDate,
         priority,
       };
-
-      project.projectTodos.push(todo);
+      
+      Store.addTodoToLocal(projectTitle, todo);
     }
   }
 }
