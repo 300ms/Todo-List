@@ -21,6 +21,4 @@ document.getElementById('project-form').addEventListener('submit', (e) => {
   UI.addProject(title);
 });
 
-
-
 UI.addListeners();
