@@ -6,11 +6,15 @@ import Store from './store';
 
 document.addEventListener('DOMContentLoaded', UI.listProjects());
 document.addEventListener('DOMContentLoaded', UI.showProject(Store.getProjectsFromLocal()[0].projectName));
-
-document.querySelector('.project-ul').addEventListener('click', (event) => {
+const projectList = document.querySelector('.project-ul');
+projectList.addEventListener('click', (event) => {
   if (event.target.classList.contains('project-title')) {
     UI.clearTodos();
     UI.showProject(event.target.innerHTML);
+    for (let i = 1; i < projectList.children.length; i += 1) {
+      projectList.children[i].style.backgroundColor = '#17141f';
+    }
+    event.target.parentElement.parentElement.parentElement.style.backgroundColor = 'gray';
   }
 });
 

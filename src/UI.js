@@ -10,7 +10,7 @@ class UI {
     projects.forEach(project => {
       const li = `
       <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="justify-content-between d-flex" id="projectInfo" style="width: 100%;">
+        <div class="justify-content-between d-flex flex-nowrap" id="projectInfo" style="width: 100%;">
           <div class="d-inline-block">
             <h4 class="project-title">${project.projectName}</h4>
           </div>
@@ -22,7 +22,7 @@ class UI {
         </div>
         
         <div class="d-none" id="showEditFrom" style="width: 100%;">
-          <form class="form-inline my-2 my-lg-0 justify-content-between" id ="project-name-form" autocomplete="off" style="width: 100%;">
+          <form class="form-inline my-2 my-lg-0 justify-content-between flex-nowrap" id ="project-name-form" autocomplete="off" style="width: 100%;">
             <input class="form-control mr-sm-2" type="text" placeholder="New Project Name" name = 'title' style="width: 10rem;" required />
             <button class="btn btn-success text-center px-0 mx-1 saveProject" type="button" style="width: 4rem;">save</button>
             <button class="btn btn-danger text-center px-0 mx-1 cancelProject" type="button" style="width: 4rem;">cancel</button>
@@ -32,7 +32,7 @@ class UI {
     `;
       ul.innerHTML += li;
     });
-
+    ul.children[1].style.backgroundColor = 'gray';
     content.appendChild(ul);
   }
 
@@ -73,6 +73,12 @@ class UI {
         if (todo.priority === 'high') {
           cardClass = 'bg-warning';
         }
+        let options;
+        if (todo.priority === 'high') {
+          options = '<option value="high" selected>High</option><option value="low">Low</option>';
+        } else {
+          options = '<option value="high">High</option><option value="low" selected>Low</option>';
+        }
         const div = `
         <div class="card text-white ${cardClass} mb-3 mx-3" style="width: 20rem;">
           <div class="card-header">
@@ -80,11 +86,29 @@ class UI {
             <input type="checkbox" id="todo-status" class="checkBox" name="complete" ${bool}>
             <button class="badge badge-danger badge-pill deleteTodo float-right">Delete</button>
           </div>
-          <div class="cardBody">
-            <h4 class="card-title">${todo.title}</h4>
-            <p class="card-text">${todo.description}</p>
+          <div class="cardBody" style="height: 100%;">
+            <h4 class="card-title todo-headers">${todo.title}</h4>
+            <div class="d-none" id="editTitle" style="width: 100%;">
+              <form class="form-inline my-3 my-1 justify-content-between flex-nowrap" id="todo-name-form" autocomplete="off" style="width: 100%;">
+                <input class="form-control mr-sm-2" type="text" placeholder="New Todo Name" name = 'title' style="width: 10rem;" required />
+                <button class="btn btn-success text-center px-0 mx-1 saveTodo" type="button" style="width: 4rem;">save</button>
+                <button class="btn btn-danger text-center px-0 mx-1 cancelTodo" type="button" style="width: 4rem;">cancel</button>
+              </form>
+            </div>
+            <p class="card-text todo-description">${todo.description}</p>
+            <div class="d-none" id="editDescription" style="width: 100%;">
+              <form class="form-inline my-3 my-1 justify-content-between flex-nowrap" id="todo-description-form" autocomplete="off" style="width: 100%;">
+                <input class="form-control mr-sm-2" type="text" placeholder="New Description" name="description" style="width: 10rem;" required />
+                <button class="btn btn-success text-center px-0 mx-1 saveDescription" type="button" style="width: 4rem;">save</button>
+                <button class="btn btn-danger text-center px-0 mx-1 cancelDescription" type="button" style="width: 4rem;">cancel</button>
+              </form>
+            </div>
           </div>
-          <div class="card-footer"><span>Due Date: ${todo.dueDate}</span><span class="float-right">Priority: ${todo.priority}</span></div>
+          <div class="card-footer"><span>Due Date: ${todo.dueDate}</span>
+            <select name="priority" class="form-control mr-sm-2 my-2 todo-priorities">
+              ${options}
+            </select>
+          </div>
         </div>
         `;
 
@@ -189,6 +213,46 @@ class UI {
     }
   }
 
+  static toggleTodoForm(e) {
+    let header;
+    let form;
+
+    if (e.target.classList.contains('todo-headers')) {
+      header = e.target;
+      form = e.target.nextElementSibling;
+    } else if (e.target.classList.contains('saveTodo') || e.target.classList.contains('cancelTodo')) {
+      header = e.target.parentElement.parentElement.previousElementSibling;
+      form = e.target.parentElement.parentElement;
+    }
+
+    if (header && form) {
+      header.classList.toggle('d-none');
+      form.classList.toggle('d-none');
+      form.classList.toggle('d-flex');
+      form.children[0].reset();
+    }
+  }
+
+  static toggleDescriptionForm(e) {
+    let p;
+    let form;
+
+    if (e.target.classList.contains('todo-description')) {
+      p = e.target;
+      form = e.target.nextElementSibling;
+    } else if (e.target.classList.contains('saveDescription') || e.target.classList.contains('cancelDescription')) {
+      p = e.target.parentElement.parentElement.previousElementSibling;
+      form = e.target.parentElement.parentElement;
+    }
+
+    if (p && form) {
+      p.classList.toggle('d-none');
+      form.classList.toggle('d-none');
+      form.classList.toggle('d-flex');
+      form.children[0].reset();
+    }
+  }
+
   static addTodoListeners() {
     document.querySelector('#todo-form').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -198,7 +262,6 @@ class UI {
       const desc = e.target.desc.value;
       const dueDate = e.target.dueDate.value;
       const priority = e.target.priority.value;
-      // const complete = (e.target.complete.checked) ? 1 : 0
 
       UI.addTodo(projectTitle, todoTitle, desc, dueDate, priority);
       UI.todosFormReset();
@@ -221,7 +284,64 @@ class UI {
         const todoTitle = e.target.parentElement.nextElementSibling.children[0].innerHTML;
         const complete = (e.target.checked) ? 1 : 0;
 
-        Todos.editTodoCheck(projectTitle, todoTitle, complete);
+        Todos.editTodoStatus(projectTitle, todoTitle, complete);
+      });
+    });
+
+    document.querySelectorAll('.todo-headers').forEach(header => {
+      header.addEventListener('click', e => {
+        UI.toggleTodoForm(e);
+      });
+    });
+
+    document.querySelectorAll('.todo-priorities').forEach(priority => {
+      priority.addEventListener('change', e => {
+        const projectTitle = document.getElementById('current-project').value;
+        const todoTitle = e.target.parentElement.previousElementSibling.children[0].innerHTML;
+        const newPriority = e.target.value;
+        Todos.editTodoPriority(projectTitle, todoTitle, newPriority);
+        UI.refreshTodoList(projectTitle);
+      });
+    });
+
+    document.querySelectorAll('.saveTodo').forEach(button => {
+      button.addEventListener('click', e => {
+        const projectTitle = document.getElementById('current-project').value;
+        const todoTitle = e.target.parentElement.parentElement.previousElementSibling.innerHTML;
+        const newTitle = e.target.parentElement.title.value;
+        Todos.editTodoTitle(projectTitle, todoTitle, newTitle);
+        UI.toggleTodoForm(e);
+        UI.refreshTodoList(projectTitle);
+      });
+    });
+
+    document.querySelectorAll('.cancelTodo').forEach(button => {
+      button.addEventListener('click', e => {
+        UI.toggleTodoForm(e);
+      });
+    });
+
+    document.querySelectorAll('.todo-description').forEach(p => {
+      p.addEventListener('click', e => {
+        UI.toggleDescriptionForm(e);
+      });
+    });
+
+    document.querySelectorAll('.saveDescription').forEach(button => {
+      button.addEventListener('click', e => {
+        const projectTitle = document.getElementById('current-project').value;
+        const todoTitle = e.target.parentElement.parentElement
+          .previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+        const newDescription = e.target.parentElement.description.value;
+        Todos.editTodoDescription(projectTitle, todoTitle, newDescription);
+        UI.toggleDescriptionForm(e);
+        UI.refreshTodoList(projectTitle);
+      });
+    });
+
+    document.querySelectorAll('.cancelDescription').forEach(button => {
+      button.addEventListener('click', e => {
+        UI.toggleDescriptionForm(e);
       });
     });
   }

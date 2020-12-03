@@ -30,8 +30,20 @@ class Todos {
     }
   }
 
-  static editTodoCheck(projectTitle, todoTitle, complete) {
-    Store.editTodoOnLocal(projectTitle, todoTitle, complete);
+  static editTodoStatus(projectTitle, todoTitle, complete) {
+    Store.editTodoStatusOnLocal(projectTitle, todoTitle, complete);
+  }
+
+  static editTodoTitle(projectTitle, todoTitle, newTitle) {
+    Store.editTodoTitleOnLocal(projectTitle, todoTitle, newTitle);
+  }
+
+  static editTodoDescription(projectTitle, todoTitle, newDescription) {
+    Store.editTodoDescriptionOnLocal(projectTitle, todoTitle, newDescription);
+  }
+
+  static editTodoPriority(projectTitle, todoTitle, newPriority) {
+    Store.editTodoPriorityOnLocal(projectTitle, todoTitle, newPriority);
   }
 }
 

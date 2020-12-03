@@ -79,18 +79,61 @@ class Store {
     return proj;
   }
 
-  static editTodoOnLocal(projectTitle, todoTitle, complete) {
-    const projects = Store.getProjectsFromLocal();
-    const proj = Store.findProject(projects, projectTitle);
-
-    if (proj) {
-      proj.projectTodos.forEach((t) => {
+  static findTodo(project, todoTitle) {
+    let todo;
+    if (project) {
+      project.projectTodos.forEach((t) => {
         if (t.title === todoTitle) {
-          t.complete = complete;
+          todo = t;
         }
       });
     }
-    localStorage.setItem('projects', JSON.stringify(projects));
+
+    return todo;
+  }
+
+  static editTodoStatusOnLocal(projectTitle, todoTitle, complete) {
+    const projects = Store.getProjectsFromLocal();
+    const project = Store.findProject(projects, projectTitle);
+    const todo = Store.findTodo(project, todoTitle);
+
+    if (todo) {
+      todo.complete = complete;
+      localStorage.setItem('projects', JSON.stringify(projects));
+    }
+  }
+
+  static editTodoTitleOnLocal(projectTitle, todoTitle, newTitle) {
+    const projects = Store.getProjectsFromLocal();
+    const project = Store.findProject(projects, projectTitle);
+    const todo = Store.findTodo(project, todoTitle);
+
+    if (todo) {
+      todo.title = newTitle;
+      localStorage.setItem('projects', JSON.stringify(projects));
+    }
+  }
+
+  static editTodoDescriptionOnLocal(projectTitle, todoTitle, newDescription) {
+    const projects = Store.getProjectsFromLocal();
+    const project = Store.findProject(projects, projectTitle);
+    const todo = Store.findTodo(project, todoTitle);
+
+    if (todo) {
+      todo.description = newDescription;
+      localStorage.setItem('projects', JSON.stringify(projects));
+    }
+  }
+
+  static editTodoPriorityOnLocal(projectTitle, todoTitle, newPriority) {
+    const projects = Store.getProjectsFromLocal();
+    const project = Store.findProject(projects, projectTitle);
+    const todo = Store.findTodo(project, todoTitle);
+
+    if (todo) {
+      todo.priority = newPriority;
+      localStorage.setItem('projects', JSON.stringify(projects));
+    }
   }
 }
 
