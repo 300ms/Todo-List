@@ -71,6 +71,7 @@ repository from github to try it.
 * Create a new project with a title by using the form in the project list.
 * Create a new todo with a title, description, due date and priority by using the form in the todo list of the project.
 * Click on the red "Delete" button to delete a todo or a project.
+* Click on title or description of todo to edit.
 
 ## Authors
 
