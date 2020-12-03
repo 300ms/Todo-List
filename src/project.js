@@ -26,14 +26,14 @@ class Project {
     Store.editProjectOnLocal(currentTitle, newTitle);
   }
 
-  static delete(title, ShowAlert) {
+  static delete(title) {
     if (Project.getProject(title)) {
-      if (Project.getProject(title).projectTodos.length > 0) {
-        ShowAlert;
-      } else {
+      if (Project.getProject(title).projectTodos.length < 1) {
         Store.removeProjectFromLocal(title);
+        return true;
       }
     }
+    return false;
   }
 }
 

@@ -15,7 +15,7 @@ class UI {
             <h4 class="project-title">${project.projectName}</h4>
           </div>
           <div class="d-inline-block">
-            <span class="badge badge-primary badge-pill">14</span>
+            <span class="badge badge-primary badge-pill">${project.projectTodos.length}</span>
             <button class="badge badge-warning badge-pill editProject">Edit</button>
             <button class="badge badge-danger badge-pill deleteProject">Delete</button>
           </div>
@@ -84,7 +84,7 @@ class UI {
             <h4 class="card-title">${todo.title}</h4>
             <p class="card-text">${todo.description}</p>
           </div>
-          <div class="card-footer"><span>${todo.dueDate}</span><span class="float-right">${todo.priority}</span></div>
+          <div class="card-footer"><span>Due Date: ${todo.dueDate}</span><span class="float-right">Priority: ${todo.priority}</span></div>
         </div>
         `;
 
@@ -127,6 +127,7 @@ class UI {
   static addTodo(projectTitle, todoTitle, desc, dueDate, priority) {
     Todos.addTodos(projectTitle, todoTitle, desc, dueDate, priority);
     UI.refreshTodoList(projectTitle);
+    UI.refreshProjectList();
   }
 
   static editProject(e) {
@@ -139,9 +140,13 @@ class UI {
 
   static deleteProject(e) {
     const title = e.target.parentElement.previousElementSibling.children[0].innerHTML;
-    Project.delete(title, UI.showMsg('This project contains incomplete tasks', 'warning'));
-
-    UI.refreshProjectList();
+    const bool = Project.delete(title);
+    if (bool) {
+      UI.refreshProjectList();
+      UI.showMsg('The project has removed.', 'success');
+    } else {
+      UI.showMsg('This project contains incomplete tasks', 'warning');
+    }
   }
 
   static todosFormReset() {
@@ -206,6 +211,7 @@ class UI {
 
         e.target.parentElement.parentElement.remove();
         Todos.delete(currentProject, todoTitle);
+        UI.refreshProjectList();
       });
     });
 
