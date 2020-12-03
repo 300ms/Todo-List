@@ -139,7 +139,7 @@ class UI {
 
   static deleteProject(e) {
     const title = e.target.parentElement.previousElementSibling.children[0].innerHTML;
-    Project.delete(title);
+    Project.delete(title, UI.showMsg('This project contains incomplete tasks', 'warning'));
 
     UI.refreshProjectList();
   }
@@ -149,6 +149,19 @@ class UI {
     document.querySelector('.todo-desc').value = '';
     document.querySelector('.todo-due-date').value = '';
     document.querySelector('.todo-priority').value = '';
+  }
+
+  static showMsg(msg, className) {
+    const div = document.createElement('div');
+    div.className = `text-center alert alert-${className}`;
+    div.appendChild(document.createTextNode(msg));
+
+    const body = document.querySelector('body');
+    const content = document.querySelector('.content');
+
+    body.insertBefore(div, content);
+
+    setTimeout(() => document.querySelector('.alert').remove(), 4000);
   }
 
   static toggleProjectForm(e) {
@@ -203,9 +216,6 @@ class UI {
         const complete = (e.target.checked) ? 1 : 0;
 
         Todos.editTodoCheck(projectTitle, todoTitle, complete);
-        console.log(projectTitle);
-        console.log(todoTitle);
-        console.log(complete);
       });
     });
   }

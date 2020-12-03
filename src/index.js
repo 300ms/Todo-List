@@ -6,7 +6,6 @@ import Store from './store';
 
 document.addEventListener('DOMContentLoaded', UI.listProjects());
 document.addEventListener('DOMContentLoaded', UI.showProject(Store.getProjectsFromLocal()[0].projectName));
-document.addEventListener('DOMContentLoaded', console.log(Store.getProjectsFromLocal()));
 
 document.querySelector('.project-ul').addEventListener('click', (event) => {
   if (event.target.classList.contains('project-title')) {

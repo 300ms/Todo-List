@@ -26,10 +26,10 @@ class Project {
     Store.editProjectOnLocal(currentTitle, newTitle);
   }
 
-  static delete(title) {
+  static delete(title, ShowAlert) {
     if (Project.getProject(title)) {
       if (Project.getProject(title).projectTodos.length > 0) {
-        alert('This project has incomplete tasks');
+        ShowAlert;
       } else {
         Store.removeProjectFromLocal(title);
       }
