@@ -23,7 +23,7 @@ class UI {
         
         <div class="d-none" id="showEditFrom" style="width: 100%;">
           <form class="form-inline my-2 my-lg-0 justify-content-between" id ="project-name-form" autocomplete="off" style="width: 100%;">
-            <input class="form-control mr-sm-2" type="text" placeholder="New Project Name" name = 'title' style="width: 10rem;">
+            <input class="form-control mr-sm-2" type="text" placeholder="New Project Name" name = 'title' style="width: 10rem;" required />
             <button class="btn btn-success text-center px-0 mx-1 saveProject" type="button" style="width: 4rem;">save</button>
             <button class="btn btn-danger text-center px-0 mx-1 cancelProject" type="button" style="width: 4rem;">cancel</button>
           </form>
@@ -46,9 +46,9 @@ class UI {
         <div class="card-header">Add Task</div>
         <div class="cardBody">
           <input type="hidden" id="current-project" name="currentProject" value="${title}"> 
-          <input class="form-control mr-sm-2 my-2 todo-name" type="text" placeholder="Task Name" name = 'name'>
-          <input class="form-control mr-sm-2 my-2 todo-desc" type="text" placeholder="Task Description" name = 'desc'>
-          <input class="form-control mr-sm-2 my-2 todo-due-date" type="text" placeholder="Due date" name = 'dueDate'>
+          <input class="form-control mr-sm-2 my-2 todo-name" type="text" placeholder="Task Name" name = 'name' required />
+          <input class="form-control mr-sm-2 my-2 todo-desc" type="text" placeholder="Task Description" name = 'desc' />
+          <input class="form-control mr-sm-2 my-2 todo-due-date" type="date" placeholder="Due date" name = 'dueDate' />
           <label for="priority">Priority:</label>
 
           <select name="priority" id="priority" class="form-control mr-sm-2 my-2 todo-priority">
@@ -104,7 +104,7 @@ class UI {
     ul.innerHTML = `
       <li>
         <form class="my-2 my-lg-0" id="project-form" autocomplete="off">
-          <input class="form-control mr-sm-2 project-form-title" type="text" placeholder="New Project" name = 'title'>
+          <input class="form-control mr-sm-2 project-form-title" type="text" placeholder="New Project" name = 'title' required>
           <button class="btn btn-success float-right my-3 mx-3" type="submit">Submit</button>
         </form>
       </li>
