@@ -19,7 +19,7 @@
     <a href="https://microverse.org/"><strong> Microverse Page »</strong></a>
     <br />
     <br />
-    <a href="https://oloomoses.github.io/book-store/">View Demo</a>
+    <a href="#">View Demo</a>
     ·
     <a href="https://github.com/300ms/Todo-List/issues">Report Bug & Request Feature</a>
   </p>
