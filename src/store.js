@@ -18,14 +18,17 @@ class Store {
     localStorage.setItem('projects', JSON.stringify(projects));
   }
 
-  static editProjectOnLocal(currentTitle, newTitle) {
-    const projects = Store.getProjectsFromLocal();
-
+  static editProj(projects, currentTitle, newTitle) {
     projects.forEach(p => {
       if (p.projectName === currentTitle) {
         p.projectName = newTitle;
       }
     });
+  }
+
+  static editProjectOnLocal(currentTitle, newTitle) {
+    const projects = Store.getProjectsFromLocal();
+    Store.editProj(projects, currentTitle, newTitle);
 
     localStorage.setItem('projects', JSON.stringify(projects));
   }
@@ -82,7 +85,7 @@ class Store {
   static findTodo(project, todoTitle) {
     let todo;
     if (project) {
-      project.projectTodos.forEach((t) => {
+      project.projectTodos.forEach(t => {
         if (t.title === todoTitle) {
           todo = t;
         }
