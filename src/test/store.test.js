@@ -29,11 +29,6 @@ test('Find todo', () => {
       projectName: 'project one',
       projectTodos: [{ title: 'one' }, { title: 'two' }],
     },
-
-    {
-      projectName: 'Sample project',
-      projectTodos: [{ title: 'thee' }],
-    },
   ];
 
   expect(Store.findTodo(proj[0], 'one')).toEqual({ title: 'one' });
