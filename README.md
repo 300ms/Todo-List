@@ -34,6 +34,7 @@
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
 * [Usage](#usage)
+* [Testing](#testing)
 * [Authors](#authors)
 * [Contributing](#contributing)
 * [License](#license)
@@ -72,6 +73,13 @@ repository from github to try it.
 * Create a new todo with a title, description, due date and priority by using the form in the todo list of the project.
 * Click on the red "Delete" button to delete a todo or a project.
 * Click on title or description of todo to edit.
+
+## Testing
+
+* `git clone git@github.com:oloomoses/Todo-List.git`
+* `cd Todo-List`
+* `git checkout testing`
+* `npm run test`
 
 ## Authors
 

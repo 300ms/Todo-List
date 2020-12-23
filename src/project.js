@@ -8,7 +8,10 @@ class Project {
 
   static getProject(title) {
     const projects = Store.getProjectsFromLocal();
+    Project.returnProj(projects, title);
+  }
 
+  static returnProj(projects, title) {
     let proj = {};
     projects.forEach(project => {
       if (project.projectName === title) {
